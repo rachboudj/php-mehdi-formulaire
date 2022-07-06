@@ -7,17 +7,17 @@ if(!empty($_POST['submitted'])) {
     // Faille XSS
 
 
-    $title = cleanXss('title');
-    $content = trim(strip_tags($_POST['content']));
-    $mail = trim(strip_tags($_POST['mail']));
+    $nom = cleanXss('title');
+    $prenom = trim(strip_tags($_POST['prenom']));
+    $email = trim(strip_tags($_POST['email']));
     // Validation
-    $errors = validText($errors,$title,'title',3,100);
-    $errors = validText($errors,$content,'content',10,1000);
-    $errors = validEmail($errors, $mail, 'mail');
+    $errors = validText($errors,$nom,'nom',3,100);
+    $errors = validText($errors,$prenom,'prenom',10,1000);
+    $errors = validEmail($errors, $email, 'email');
 
     if(count($errors) === 0) {
         // insertion en BDD si aucune error
-        $sql = "INSERT INTO beer (title,content,email,created_at) VALUES (:title,:content,:mail,NOW())";
+        $sql = "INSERT INTO beer (nom,prenom,email,created_at) VALUES (:nom,:prenom,:email,NOW())";
         $query = $pdo->prepare($sql);
         // ATTENTION INJECTION SQL
         $query->bindValue(':title',$title, PDO::PARAM_STR);
@@ -37,15 +37,15 @@ if(!empty($_POST['submitted'])) {
     <form action="" method="post" novalidate class="wrap2">
         <label for="nom">Nom</label>
         <input type="text" name="nom" id="nom" value="<?php if(!empty($_POST['nom'])) { echo $_POST['nom']; } ?>">
-        <span class="error"><?php if(!empty($errors['title'])) { echo $errors['title']; } ?></span>
+        <span class="error"><?php if(!empty($errors['nom'])) { echo $errors['nom']; } ?></span>
 
         <label for="prenom">Prénom</label>
         <textarea name="prenom" id="prenom" cols="30" rows="10"><?php if(!empty($_POST['prenom'])) { echo $_POST['prenom']; } ?></textarea>
-        <span class="error"><?php if(!empty($errors['content'])) { echo $errors['content']; } ?></span>
+        <span class="error"><?php if(!empty($errors['prenom'])) { echo $errors['prenom']; } ?></span>
 
         <label for="email">E-mail</label>
         <input type="email" name="email" id="email" value="<?php if(!empty($_POST['email'])) { echo $_POST['email']; } ?>">
-        <span class="error"><?php if(!empty($errors['mail'])) { echo $errors['mail']; } ?></span>
+        <span class="error"><?php if(!empty($errors['email'])) { echo $errors['email']; } ?></span>
 
         <input type="submit" name="submitted" value="Ajouter un utilisateur">
     </form>
