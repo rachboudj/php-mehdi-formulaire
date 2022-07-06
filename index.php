@@ -9,25 +9,27 @@ if(!empty($_POST['submitted'])) {
     // Faille XSS
 
 
-    $nom = cleanXss('title');
-    $prenom = trim(strip_tags($_POST['prenom']));
-    $email = trim(strip_tags($_POST['email']));
+    $nom = cleanXss('nom');
+    $prenom = cleanXss('prenom');
+    $email = cleanXss('email');
+    // $prenom = trim(strip_tags($_POST['prenom']));
+    // $email = trim(strip_tags($_POST['email']));
     // Validation
-    $errors = validText($errors,$nom,'nom',3,100);
-    $errors = validText($errors,$prenom,'prenom',10,1000);
+    $errors = validText($errors,$nom,'nom',2,100);
+    $errors = validText($errors,$prenom,'prenom',2,100);
     $errors = validEmail($errors, $email, 'email');
 
     if(count($errors) === 0) {
         // insertion en BDD si aucune error
-        $sql = "INSERT INTO beer (nom,prenom,email,created_at) VALUES (:nom,:prenom,:email,NOW())";
+        $sql = "INSERT INTO users (nom,prenom,email,created_at) VALUES (:nom,:prenom,:email,NOW())";
         $query = $pdo->prepare($sql);
         // ATTENTION INJECTION SQL
-        $query->bindValue(':title',$title, PDO::PARAM_STR);
-        $query->bindValue(':content',$content, PDO::PARAM_STR);
-        $query->bindValue(':mail',$mail, PDO::PARAM_STR);
+        $query->bindValue(':nom',$nom, PDO::PARAM_STR);
+        $query->bindValue(':prenom',$prenom, PDO::PARAM_STR);
+        $query->bindValue(':email',$email, PDO::PARAM_STR);
         $query->execute();
         $last_id = $pdo->lastInsertId();
-        header('Location: detail-beer.php?id=' . $last_id);
+        // header('Location: detail-beer.php?id=' . $last_id);
         // $success = true;
     }
 }
