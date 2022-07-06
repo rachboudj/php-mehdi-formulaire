@@ -35,9 +35,18 @@ if(!empty($_POST['submitted'])) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Php mehdi formulaire</title>
 
-
-<h1>Ajouter un utilisateur</h1>
+    <link rel="stylesheet" href="./asset/style.css">
+</head>
+<body>
+    <h1>Ajouter un utilisateur</h1>
     <form action="" method="post" novalidate class="wrap2">
         <label for="nom">Nom</label>
         <input type="text" name="nom" id="nom" value="<?php if(!empty($_POST['nom'])) { echo $_POST['nom']; } ?>">
@@ -53,3 +62,5 @@ if(!empty($_POST['submitted'])) {
 
         <input type="submit" name="submitted" value="Ajouter un utilisateur">
     </form>
+</body>
+</html>
