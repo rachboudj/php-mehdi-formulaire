@@ -10,6 +10,11 @@ $query->execute();
 $users = $query->fetchAll();
 // debug($users);
 ?>
+
+<?php 
+include('includes/header.php');
+?>
+
 <h1>Les utilisateurs</h1>
 <table>
     <thead>
@@ -29,10 +34,11 @@ $users = $query->fetchAll();
                 <td><?= $user['nom']; ?></td>
                 <td><?= $user['prenom']; ?></td>
                 <td><?= $user['email']; ?></td>
-                <td><a href="edit_user.php?id=<? $user['id'] ?>">Éditer</a></td>
-                <td><a href="supp_user.php?id=<? $user['id'] ?>">Supprimer</a></td>
+                <td><a href="edit_user.php?id=<?= $user['id'] ?>">Éditer</a></td>
+                <td><a href="supp_user.php?id=<?= $user['id'] ?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </tbody>
 </table>
-<?php // include('inc/footer.php');
+
+<?php include('includes/footer.php');
