@@ -9,3 +9,12 @@
     <link rel="stylesheet" href="./asset/style.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="list_user.php">Les utilisateurs</a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </nav>
+    </header>
