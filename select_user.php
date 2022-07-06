@@ -3,12 +3,12 @@ require('includes/pdo.php');
 require('includes/function.php');
 $title = "Contact";
 // Get all beers
-$sql = "SELECT * FROM users ORDER BY created_at DESC";
+$sql = "SELECT * FROM users ORDER BY created_at ASC";
 $query = $pdo->prepare($sql);
 $query->execute();
 // fetchAll, fetch , fetchColumn
 $users = $query->fetchAll();
-debug($users);
+// debug($users);
 ?>
 <h1>Les utilisateurs</h1>
 <table>
