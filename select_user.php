@@ -30,7 +30,7 @@ $users = $query->fetchAll();
                 <td><?= $user['prenom']; ?></td>
                 <td><?= $user['email']; ?></td>
                 <td><a href="edit_user.php?id=<? $user['id'] ?>">Éditer</a></td>
-                <td><a href="supp.php?id=<? $user['id'] ?>">Supprimer</a></td>
+                <td><a href="supp_user.php?id=<? $user['id'] ?>">Supprimer</a></td>
             </tr>
         <?php } ?>
     </tbody>
